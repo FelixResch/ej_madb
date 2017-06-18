@@ -68,10 +68,28 @@
             </nav>
         </nav>
     </aside>
+    
+    <main>
+        <table id="members-table">
+            <thead>
+                <th>Nachname</th>
+                <th>Vorname</th>
+                <th>Geburtstag</th>
+                <th>Telefon</th>
+                <th>E-Mail</th>
+            </thead>
+            <tbody id="members-table-body">
+            
+            </tbody>
+        </table>
+    </main>
 
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 <script>window.mdc.autoInit();</script>
 <script>
+    const status = {
+        group_id: <%= user.base_group_id %>
+    }
     const drawer = new mdc.drawer.MDCPersistentDrawer(document.querySelector('.mdc-persistent-drawer'));
     const drawerToggle = document.querySelector('#drawer-toggle');
     drawerToggle.addEventListener("click", function (evt) {
@@ -89,5 +107,6 @@
         }
     });
 </script>
+<script src="/js/app.index.js"></script>
   </body>
 </html>

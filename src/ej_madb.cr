@@ -22,11 +22,12 @@ class UserStorableObject
     id: Int32,
     firstname: String,
     lastname: String,
-    group_name: String
+    group_name: String,
+    base_group_id: Int32
   })
   include Session::StorableObject
 
-  def initialize(@id : Int32, @firstname : String, @lastname : String, @group_name : String); end
+  def initialize(@id : Int32, @firstname : String, @lastname : String, @group_name : String, @base_group_id : Int32); end
 end
 
 class MemberLogin
@@ -87,7 +88,7 @@ post "/login" do |env|
             digest_sha512.update password
             hashed_pwd = digest_sha512.digest
             if cmpPwds(hashed_pwd, member.password.bytes)
-                env.session.object("user", UserStorableObject.new(member.member, member.firstname, member.lastname, member.group_name))
+                env.session.object("user", UserStorableObject.new(member.member, member.firstname, member.lastname, member.group_name, member.base_group))
             end
         end
     end
