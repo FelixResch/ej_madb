@@ -2,3 +2,5 @@
 /lib/
 /bin/
 /.shards/
+/public/css/*.css
+/public/css/*.css.map
