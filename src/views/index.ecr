@@ -1,0 +1,93 @@
+ <!DOCTYPE html>
+<html class="mdc-typography">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Greeting App</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+      <link rel="stylesheet" href="/css/styles.css" />
+      <style>
+        :root {
+            --mdc-theme-primary: #0e4ead;
+        }
+        .mdc-ripple-surface.mdc-ripple-upgraded.mdc-button--primary::before,
+        .mdc-ripple-surface.mdc-ripple-upgraded.mdc-button--primary::after {
+            background-color: rgba(255, 255, 255, .2);
+        }
+
+        #greeting-form > button {
+            margin-top: 8px;
+        }
+     </style>
+  </head>
+  <body>
+    <header class="mdc-toolbar mdc-toolbar--fixed mdc-toolbar--waterfall" data-mdc-auto-init="MDCToolbar">
+        <div class="mdc-toolbar__row">
+           <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+                <span class="catalog-back">
+                    <a class="material-icons" id="drawer-toggle">menu</a>
+                </span>
+                <span class="mdc-toolbar__title"><%= user.lastname.upcase %>, <%= user.firstname %> - <%= user.group_name %></span>
+            </section>
+            <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+                <div class="mdc-menu-anchor">
+                    <a class="material-icons" id="menu-toggle">more_vert</a>
+                    <div class="mdc-simple-menu" data-mdc-auto-init="MDCSimpleMenu">
+                        <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                            <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                A Menu Item
+                            </li>
+                            <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                Logout
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </header>
+
+    <aside class="mdc-persistent-drawer mdc-typography">
+        <nav class="mdc-persistent-drawer__drawer">
+            <header class="mdc-persistent-drawer__header">
+                <div class="mdc-persistent-drawer__header-content">
+                    Header here
+                </div>
+            </header>
+            <nav id="icon-with-text-demo" class="mdc-persistent-drawer__content mdc-list">
+            <a class="mdc-list-item mdc-persistent-drawer--selected" href="#">
+                <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">inbox</i>Inbox
+            </a>
+            <a class="mdc-list-item" href="#">
+                <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">star</i>Star
+            </a>
+            </nav>
+        </nav>
+    </aside>
+
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+<script>window.mdc.autoInit();</script>
+<script>
+    const drawer = new mdc.drawer.MDCPersistentDrawer(document.querySelector('.mdc-persistent-drawer'));
+    const drawerToggle = document.querySelector('#drawer-toggle');
+    drawerToggle.addEventListener("click", function (evt) {
+        drawer.open = !drawer.open;
+    });
+    const menuComp = document.querySelector('.mdc-simple-menu');
+    const menu = new mdc.menu.MDCSimpleMenu(menuComp);
+    const menuToggler = document.querySelector('#menu-toggle');
+    menuToggler.addEventListener("click", function (evt) {
+        menu.open = !menu.open;
+    });
+    menuComp.addEventListener("MDCSimpleMenu:selected", ({detail}) => {
+        if(detail.index === 1) {
+            document.location = "/logout";
+        }
+    });
+</script>
+  </body>
+</html>

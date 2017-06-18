@@ -1,0 +1,34 @@
+version: 1.0
+shards:
+  db:
+    github: crystal-lang/crystal-db
+    version: 0.4.2
+
+  kemal:
+    github: kemalcr/kemal
+    commit: 0724e07c22513790fbeefeca3bf8e1a8407d44b2
+
+  kemal-session:
+    github: kemalcr/kemal-session
+    commit: bbef25f36fe6505d3221de9952f94a1023225b85
+
+  kemal-watcher:
+    github: faustinoaq/kemal-watcher
+    version: 0.1.7
+
+  kilt:
+    github: jeromegn/kilt
+    version: 0.3.3
+
+  mysql:
+    github: crisward/crystal-mysql
+    version: 0.3.2
+
+  radix:
+    github: luislavena/radix
+    version: 0.3.8
+
+  watcher:
+    github: faustinoaq/watcher
+    version: 0.1.9
+

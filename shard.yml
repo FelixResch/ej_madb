@@ -1,0 +1,25 @@
+name: ej_madb
+version: 0.1.0
+
+authors:
+  - felix <resch.felix@gmail.com>
+
+targets:
+  ej_madb:
+    main: src/ej_madb.cr
+
+crystal: 0.22.0
+
+license: MIT
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+    branch: master
+  kemal-session:
+    github: kemalcr/kemal-session
+    branch: master
+  kemal-watcher:
+    github: faustinoaq/kemal-watcher
+  mysql:
+    github: crisward/crystal-mysql

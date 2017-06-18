@@ -1,0 +1,25 @@
+
+=user-select($select-type)
+    -webkit-user-select: $select-type
+    -moz-user-select:    $select-type
+    -ms-user-select:     $select-type
+    user-select:         $select-type
+
+
+html, body
+    background-color: white
+    height: 100%
+
+span.catalog-back
+    padding-right: 24px
+
+    .material-icons
+        color: inherit
+        text-decoration: none
+        +user-select(none)
+        
+.mdc-toolbar
+    
+    .material-icons
+        +user-select(none)
+        cursor: pointer
