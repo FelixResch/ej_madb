@@ -24,6 +24,10 @@ shards:
     github: crisward/crystal-mysql
     version: 0.3.2
 
+  ooxml:
+    github: FelixResch/crystal-ooxml
+    commit: 6907273f3756983420e22427b1432eaf3f603754
+
   radix:
     github: luislavena/radix
     version: 0.3.8

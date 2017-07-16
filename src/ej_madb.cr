@@ -42,7 +42,7 @@ class MemberLogin
                 group_name: { type: String, key: "g_name" }
             })
     
-    def initialize(@member : Int32, @username : String, @password : Bytes, @digest_hash : Bytes, @firstname : String, @lastname : String, @base_group : UInt32, @group_name : String); end
+    def initialize(@member : Int32, @username : String, @password : Bytes, @digest_hash : Bytes, @firstname : String, @lastname : String, @base_group : Int32, @group_name : String); end
 end
 
 def cmpPwds(hashed_pwd : Bytes, member_pw : Array(UInt8))
@@ -97,6 +97,16 @@ post "/login" do |env|
         env.redirect "/"
     else
         env.redirect "/login"
+    end
+end
+
+get "/profile" do |env|
+    user = env.session.object?("user")
+    if user
+        user = user.as(UserStorableObject)
+        env.redirect "/profile/" + user.id.to_s
+    else
+        env.redirect "/"
     end
 end
 

@@ -22,6 +22,14 @@
         #greeting-form > button {
             margin-top: 8px;
         }
+        
+        .content {
+            display: flex;
+            flex: 1 1 auto;
+            height: 100%;
+            box-sizing: border-box;
+        }
+        
      </style>
   </head>
   <body>
@@ -29,7 +37,7 @@
         <div class="mdc-toolbar__row">
            <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
                 <span class="catalog-back">
-                    <a class="material-icons" id="drawer-toggle">menu</a>
+                    <a class="material-icons">home</a>
                 </span>
                 <span class="mdc-toolbar__title"><%= user.lastname.upcase %>, <%= user.firstname %> - <%= user.group_name %></span>
             </section>
@@ -39,7 +47,7 @@
                     <div class="mdc-simple-menu" data-mdc-auto-init="MDCSimpleMenu">
                         <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
                             <li class="mdc-list-item" role="menuitem" tabindex="0">
-                                A Menu Item
+                                Profil
                             </li>
                             <li class="mdc-list-item" role="menuitem" tabindex="0">
                                 Logout
@@ -50,39 +58,61 @@
             </section>
         </div>
     </header>
-
-    <aside class="mdc-persistent-drawer mdc-typography">
-        <nav class="mdc-persistent-drawer__drawer">
-            <header class="mdc-persistent-drawer__header">
-                <div class="mdc-persistent-drawer__header-content">
-                    Header here
-                </div>
-            </header>
-            <nav id="icon-with-text-demo" class="mdc-persistent-drawer__content mdc-list">
-            <a class="mdc-list-item mdc-persistent-drawer--selected" href="#">
-                <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">inbox</i>Inbox
-            </a>
-            <a class="mdc-list-item" href="#">
-                <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">star</i>Star
-            </a>
+    
+    <div class="content mdc-toolbar-fixed-adjust">
+        <nav class="mdc-permanent-drawer mdc-typography">
+           <nav id="icon-with-text-demo" class="mdc-list">
+                <a class="mdc-list-item mdc-permanent-drawer--selected" href="#">
+                    <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">home</i>Gemeinde
+                </a>
+                <a class="mdc-list-item" href="#">
+                    <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">group</i>Meine Gruppen
+                </a>
             </nav>
         </nav>
-    </aside>
+        
+        <main>
+            <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate mdc-linear-progress--accent mdc-elevation--z2">
+                <div class="mdc-linear-progress__buffering-dots"></div>
+                <div class="mdc-linear-progress__buffer"></div>
+                <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+                    <span class="mdc-linear-progress__bar-inner"></span>
+                </div>
+                <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                    <span class="mdc-linear-progress__bar-inner"></span>
+                </div>
+            </div>
+            <table id="members-table" class="ej-madb-table">
+                <thead>
+                    <th></th>
+                    <th>Nachname</th>
+                    <th>Vorname</th>
+                    <th>Geburtstag</th>
+                    <th>Telefon</th>
+                    <th>E-Mail</th>
+                </thead>
+                <tbody id="members-table-body">
+                
+                </tbody>
+            </table>
+        </main>
+    </div>
     
-    <main>
-        <table id="members-table">
-            <thead>
-                <th>Nachname</th>
-                <th>Vorname</th>
-                <th>Geburtstag</th>
-                <th>Telefon</th>
-                <th>E-Mail</th>
-            </thead>
-            <tbody id="members-table-body">
-            
-            </tbody>
-        </table>
-    </main>
+    <button aria-label="Neue Gruppe erstellen" class="mdc-fab mdc-fab--mini app-fab--absolute app-fab--absolute-mini-2" id="ejmadb-create-group" disabled>
+        <span class="mdc-fab__icon">
+            <i class="material-icons" aria-hidden="true">group_add</i>
+        </span>
+    </button>
+    <button aria-label="Neue Person zu Gruppe hinzufügen" class="mdc-fab mdc-fab--mini app-fab--absolute app-fab--absolute-mini-1" id="ejmadb-add-person" disabled>
+        <span class="mdc-fab__icon">
+            <i class="material-icons" aria-hidden="true">person_add</i>
+        </span>
+    </button>
+    <button class="mdc-fab app-fab--absolute" aria-label="Hinzufügen" id="ejmadb-fab">
+        <span class="mdc-fab__icon">
+            <i class="material-icons" aria-hidden="true">add</i>
+        </span>
+    </button>
 
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 <script>window.mdc.autoInit();</script>
@@ -90,11 +120,6 @@
     const status = {
         group_id: <%= user.base_group_id %>
     }
-    const drawer = new mdc.drawer.MDCPersistentDrawer(document.querySelector('.mdc-persistent-drawer'));
-    const drawerToggle = document.querySelector('#drawer-toggle');
-    drawerToggle.addEventListener("click", function (evt) {
-        drawer.open = !drawer.open;
-    });
     const menuComp = document.querySelector('.mdc-simple-menu');
     const menu = new mdc.menu.MDCSimpleMenu(menuComp);
     const menuToggler = document.querySelector('#menu-toggle');
@@ -104,6 +129,8 @@
     menuComp.addEventListener("MDCSimpleMenu:selected", ({detail}) => {
         if(detail.index === 1) {
             document.location = "/logout";
+        } else if (detail.index == 0) {
+            document.location = "/profile";
         }
     });
 </script>

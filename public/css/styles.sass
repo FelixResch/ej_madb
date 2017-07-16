@@ -5,27 +5,117 @@
     -ms-user-select:     $select-type
     user-select:         $select-type
 
+$table-cell-padding: 1.6rem
+$table-header-font-weight: 400
+
+$transition-time: 200ms
+$transition-curve: cubic-bezier(.4, 0, .2, 1)
 
 html, body
     background-color: white
     height: 100%
-
-span.catalog-back
-    padding-right: 24px
-
-    .material-icons
-        color: inherit
-        text-decoration: none
-        +user-select(none)
-        
+    margin: 0
+    
+body
+    height: calc(100% - 64px)
+    
 .mdc-toolbar
     
     .material-icons
         +user-select(none)
         cursor: pointer
+        padding: 20px
+        color: inherit !important
+    
+
+span.catalog-back
+
+    .material-icons
+        color: inherit
+        text-decoration: none
+        +user-select(none)
+        padding-right: 24px
+        
+
         
 table#members-table
     width: 100%
     
     tr
         border: 1px solid lightgray
+        
+main
+    width: 100%
+    
+a
+    color: var(--mdc-theme-primary)
+    text-decoration: none
+    
+table.ej-madb-table
+    thead, tbody, tfoot
+        tr
+            th, td
+                text-align: left
+                padding: $table-cell-padding
+                vertical-align: top
+                
+                ul
+                    padding: 0
+                    list-style-type: none
+                    margin: 0
+            
+            th
+                font-weight: $table-header-font-weight
+                color: var(--mdc-theme-text-secondary-on-background)
+                border-bottom: 1px solid rgba(0,0,0,.12)
+            
+            td
+                color: var(--mdc-theme-text-primary-on-background)
+                
+.member-table-icon
+    color: var(--mdc-theme-primary)
+    cursor: pointer
+     
+                
+.member-table-icon-staff
+    color: var(--mdc-theme-accent)
+    
+.mdc-fab--mini
+    color: var(--mdc-theme-text-secondary-on-background)
+    background-color: var(--mdc-theme--background)
+    
+.app-fab--absolute.app-fab--absolute
+    position: absolute
+    bottom: 1rem
+    right: 1rem
+    .mdc-fab__icon
+        i
+            transition: transform $transition-time $transition-curve
+    
+.app-fab--absolute[data-active]
+    .mdc-fab__icon
+        i
+            transform: rotate(405deg)
+        
+
+@media(min-width: 1024px) 
+    .app-fab--absolute.app-fab--absolute 
+        bottom: 3rem
+        right: 5rem
+        transition: bottom $transition-time $transition-curve
+        
+    .app-fab--absolute.mdc-fab--mini[disabled]
+        bottom: 3.5rem
+        right: calc(5rem + 8px)
+    
+    
+    .app-fab--absolute.app-fab--absolute-mini-1:not([disabled])
+        bottom: 7.5rem
+        right: calc(5rem + 8px)
+    
+    
+    .app-fab--absolute.app-fab--absolute-mini-2:not([disabled]) 
+        bottom: 11rem
+        right: calc(5rem + 8px)
+            
+        

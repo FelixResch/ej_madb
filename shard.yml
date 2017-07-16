@@ -23,3 +23,6 @@ dependencies:
     github: faustinoaq/kemal-watcher
   mysql:
     github: crisward/crystal-mysql
+  ooxml:
+    github: FelixResch/crystal-ooxml
+    branch: ooxml-workbooks
